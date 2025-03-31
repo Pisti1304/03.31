@@ -1,16 +1,16 @@
 <?php
 session_start();
 if(isset($_SESSION['beleptett'])){
-    header("Location:index.php");
+    header("Location: index.php");
     exit();
 }
 if(isset($_GET['logout'])){
     session_destroy();
-    header("location:index.php");
+    header("location: index.php");
     exit();
 }
 $menupont = 1;
-if(isset($_GET['mm']) && is_numeric($_GET['m'])){
+if(isset($_GET['m']) && is_numeric($_GET['m'])){
     $menupont = intval($_GET['m']);
 }
 
