@@ -49,4 +49,5 @@ class DBVezerlo{
         $this->conn->close();
     }
 }
+?>
 
