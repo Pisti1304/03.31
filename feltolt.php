@@ -13,3 +13,4 @@ if($dbvez->executeQuery($query,[$hash,$fnev],"ss")){
 }else   {
     echo "Hiba történt a frissítés során";
 }
+?>
