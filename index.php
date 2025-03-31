@@ -19,7 +19,7 @@ if (isset($_POST['belep'])) {  // Javított gombnév
         // Jelszó ellenőrzés
         if (password_verify($password, $hashed_password)) {
             $_SESSION['belepett'] = $email;
-            header("Location: dashboard.php"); // Itt állítsd be a belépés utáni oldalt
+            header('Location: dashboard.php'); // Itt állítsd be a belépés utáni oldalt
             exit();
         } else {
             echo "<script>alert('Hibás jelszó');</script>";

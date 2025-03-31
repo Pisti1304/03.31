@@ -60,5 +60,56 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $query = "SELECT * FROM jarmuvek WHERE id = ?";
         $jarmu = $dbvez->executeSelectQuery($query, [$last_id],"i");
         $jarmu = $jarmu[0];
+
+
+        echo"<p>Az új autó felvétele megtörtént!</p>";
+        echo "<p>márka: " . htmlspecialchars($jarmu['marka']) . "</p>" ;
+        echo "<p>Évjárat: " . htmlspecialchars($jarmu['evjarat']) . "</p>" ;
+        echo "<p>Ár: " . htmlspecialchars($jarmu['ar']) . " FT</p>" ;
+        echo "<img src='" . htmlspecialchars($jarmu['kep']) . "'alt='Jármű kép' width='100'>" ;
+        echo "<meta http-equiv='refresh' content='8;url=dashboard.php?m=2'>";
+
+    } else{
+        echo "Hiba történt: nem mindenmező lett kitöltve!";
     }
 }
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Új jármű felvitele</title>
+</head>
+<body>
+    <h2>Új jármű felvitele</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="marka">Járű márkája</label>
+        <input type="text" name="marka" required><br><br>
+
+        <label for="evjarat">Évjárat:</label>
+        <input type="text" name="evjarat" required><br><br>
+
+        <label for="ar">Ár:</label>
+        <input type="text" name="ar" step="0.01" required><br><br>
+
+        <label for="tipus">Jármű típus</label>
+        <select name="tipus" required>
+            <?php 
+            $dbvez = new DBVezerlo();
+            $query = "SELECT * FROM jarmu_tip";
+            $tipusok = $dbvez->executeSelectQuery($query,[]);
+            foreach($tipusok as $tipus){
+                echo "<option value='" . $tipus['id'] . htmlspecialchars($tipus['tipus']) . '</option>';
+            }
+            ?>
+        </select><br><br>
+
+        <label for="image">Kép feltöltése:</label>
+        <input type="file" name="image" accept="image/*" required><br><br>
+
+        <button type="submit">Jármű feltöltése</button>
+    </form>
+</body>
+</html>
